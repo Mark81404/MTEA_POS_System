@@ -1,23 +1,30 @@
+<?php
+  $page = basename($_SERVER['PHP_SELF']);
+  $bodyClass = '';
+
+  if ($page === 'login.php') {
+    $bodyClass = 'login-page';
+  } elseif ($page === 'signup.php') {
+    $bodyClass = 'signup-page';
+  }
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MilkTea POS</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="/milktea-pos/public/assets/css/style.css" />
 </head>
-<body>
 
-<?php
-  // Get the current page filename
-  $page = basename($_SERVER['PHP_SELF']);
-  // Only show nav if not login or signup
-  if ($page !== "login.php" && $page !== "signup.php" && $page !== "logout.php") :
-?>
+<body class="<?php echo $bodyClass; ?>">
+
+<?php if (!in_array($bodyClass, ['login-page', 'signup-page'])): ?>
   <header>
     <nav class="navbar">
       <a href="index.php" class="logo">
-        <img src="assets/img/logo.png" alt="logo" />
+        <img src="/milktea-pos/public/assets/img/logo.png" alt="logo" />
       </a>
       <ul class="nav-links">
         <li><a href="index.php">Home</a></li>
@@ -28,7 +35,7 @@
           <input type="password" name="pwd" placeholder="Password" />
           <button type="submit" name="login-submit">Login</button>
         </form>
-        <a href="signup.php" class="signup-btn">Signup</a>
+        <a href="/milktea-pos/public/signup.php">Sign up here</a>
         <form action="includes/logout.inc.php" method="post">
           <button type="submit" name="logout-submit">Logout</button>
         </form>
